@@ -103,6 +103,12 @@ items remain, including DNS-to-connection pinning, vendor advisory correlation,
 vulnerability caching, independently versioned fingerprint rules, and broader
 precision testing.
 
+## Audit authorship
+
+The current implementation audit was authored by **Aegis**, the OpenCode coding
+agent. See [`AUDIT.md`](AUDIT.md) for scope, validation, conclusions, and open
+risks.
+
 ## License
 
 No license has been selected yet. Treat this repository as all-rights-reserved
