@@ -1,0 +1,22 @@
+# Local environments and Python artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Local configuration, logs, and scan history
+.env
+.auditor.log
+*.sqlite3
+evidence_auditor.sqlite3
+
+# Working notes are intentionally kept local
+PROGRESS.md
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
