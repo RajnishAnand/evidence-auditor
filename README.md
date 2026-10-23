@@ -137,5 +137,5 @@ risks.
 
 ## 📄 License
 
-No license has been selected yet. Treat this repository as all-rights-reserved
-until a project license is added.
+This project is released under the [WTFPL v2](LICENSE): **Do What The Fuck You
+Want To Public License**.
