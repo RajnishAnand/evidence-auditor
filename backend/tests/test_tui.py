@@ -20,6 +20,32 @@ def test_display_result_includes_status_and_evidence():
     assert "VULNERABILITY CANDIDATES" in rendered
 
 
+def test_technology_results_use_checkbox_table_and_confidence_label():
+    lines: list[str] = []
+    display_result(
+        ScanResult(
+            target="https://example.com",
+            status=ScanStatus.completed,
+            technologies=[{
+                "product": "nginx",
+                "category": "web_server",
+                "version": "1.24.0",
+                "rule_id": "server-nginx",
+                "observed_value": "nginx/1.24.0",
+                "evidence_source": "http.header.server",
+                "confidence": 0.95,
+                "limitation": "test",
+            }],
+        ),
+        lines.append,
+    )
+
+    rendered = "\n".join(lines)
+    assert "[x] TECHNOLOGY" in rendered
+    assert "[x] nginx" in rendered
+    assert "HIGH 0.95" in rendered
+
+
 def test_result_lines_wrap_long_values_for_narrow_terminals():
     result = ScanResult(
         target="https://example.com",

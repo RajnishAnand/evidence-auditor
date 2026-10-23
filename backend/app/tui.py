@@ -13,6 +13,14 @@ from backend.app.scanning.schemas import ScanResult
 from backend.app.storage import ScanStore
 
 
+def _confidence_label(value: float) -> str:
+    if value >= 0.85:
+        return "HIGH"
+    if value >= 0.60:
+        return "MED"
+    return "LOW"
+
+
 def _result_lines(result: ScanResult, width: int = 100) -> list[str]:
     """Turn a result into readable TUI rows, not a raw JSON dump."""
     lines = [
@@ -25,9 +33,11 @@ def _result_lines(result: ScanResult, width: int = 100) -> list[str]:
         "TECHNOLOGY OBSERVATIONS",
     ]
     if result.technologies:
+        lines.append("  [x] TECHNOLOGY                    CATEGORY             VERSION       CONFIDENCE")
+        lines.append("  ─────────────────────────────────────────────────────────────────────────────")
         for technology in result.technologies:
-            version = f" {technology.version}" if technology.version else " version unknown"
-            lines.append(f"  • {technology.product}{version} [{technology.category}; confidence {technology.confidence:.2f}]")
+            version = technology.version or "unknown"
+            lines.append(f"  [x] {technology.product:<28} {technology.category:<19} {version:<12} {_confidence_label(technology.confidence)} {technology.confidence:.2f}")
             lines.append(f"    {technology.evidence_source}: {technology.observed_value}")
     else:
         lines.append("  None detected")

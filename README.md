@@ -71,9 +71,34 @@ research references. NVD keyword results and OSV package results are clearly
 marked as candidates and require version, configuration, patch, and prerequisite
 verification.
 
+## Technology certainty
+
+The TUI displays detected technologies in a checkbox-style table. `[x]` means
+that at least one public signal matched a rule; it does **not** mean the
+technology is proven to be installed at the origin.
+
+| Display | Score | Meaning | Typical evidence |
+| --- | ---: | --- | --- |
+| `HIGH` | `0.85–1.00` | Strong public signature, still externally observed | Explicit version-bearing `Server`/`X-Powered-By` header, exact framework cookie, exact generator metadata |
+| `MED` | `0.60–0.84` | Useful corroborating hint | Stable asset path, framework cookie with alternatives, HTML marker, bounded bundle signature |
+| `LOW` | `0.00–0.59` | Weak or ambiguous hint | Generic path, single weak header, indirect platform relationship |
+
+Confidence is rule-defined evidence strength, not statistical probability. A
+reverse proxy can hide the origin, cookie names can be changed, and a public
+asset can be copied by another application. Unknown versions are intentionally
+shown as `unknown`; the auditor does not invent a version from a product name.
+
+Example:
+
+```text
+[x] TECHNOLOGY                    CATEGORY             VERSION       CONFIDENCE
+[x] nginx                         web_server           1.24.0        HIGH 0.95
+    http.header.server: nginx/1.24.0
+```
+
 ## Project status
 
-The local validation suite currently passes 31 tests. Larger production-grade
+The local validation suite currently passes 32 tests. Larger production-grade
 items remain, including DNS-to-connection pinning, vendor advisory correlation,
 vulnerability caching, independently versioned fingerprint rules, and broader
 precision testing.

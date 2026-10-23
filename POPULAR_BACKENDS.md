@@ -20,6 +20,22 @@ Versions are reported only when the same signal contains a version.
 | Node.js | Express, Next.js, Nuxt | `X-Powered-By: Express`; framework asset paths *(partial)* |
 | CMS/platforms | WordPress, Drupal, Joomla, Shopify, Ghost | generator metadata, stable asset paths, platform headers |
 
+## Detection certainty matrix
+
+| Technology | Strongest public signal | Typical certainty | Version availability |
+| --- | --- | --- | --- |
+| nginx / Apache / IIS | Version-bearing `Server` header | High | Exact only when banner exposes it |
+| PHP | `X-Powered-By: PHP/x`, `PHPSESSID` | High for PHP hint; medium for cookie-only | Often available from header, otherwise unknown |
+| ASP.NET | `X-AspNet-Version`, IIS/Kestrel plus ASP.NET markers | High when version header exists | Sometimes exact |
+| Java Servlet | `JSESSIONID` plus Tomcat/Jetty header | Medium to high when corroborated | Usually unknown |
+| Django | `django_session`/`csrftoken` plus HTML or server evidence | Medium | Rarely exposed |
+| Rails | `authenticity_token`, `_rails_session`, Rails asset conventions | Medium when two markers co-occur | Usually unknown |
+| Node.js / Express | `X-Powered-By: Express`, `connect.sid`, explicit server banner | Medium; proxy-hidden origin is common | Usually unknown |
+| Frontend libraries | Versioned asset path or bundle banner | Medium to high depending on corroboration | Often available from asset |
+
+These are evidence ceilings for passive public inspection, not guarantees. A
+well-configured site may intentionally expose none of these signals.
+
 ## Detection rules
 
 - Prefer direct headers and cookie names over generic page content.
