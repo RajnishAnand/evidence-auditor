@@ -1,4 +1,30 @@
-# Evidence Auditor
+<div align="center">
+
+# 🛡️ Evidence Auditor
+
+### Conservative, evidence-first website reconnaissance for authorized targets
+
+![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-32%20passing-2ea44f?logo=pytest&logoColor=white)
+![Status](https://img.shields.io/badge/status-active%20development-f0ad4e)
+
+**Observe carefully. Correlate conservatively. Never confuse a hint with proof.**
+
+</div>
+
+> ⚠️ **Authorization required:** Use Evidence Auditor only against systems you
+> own or are explicitly authorized to assess. It performs bounded, non-destructive
+> reconnaissance—not exploitation.
+
+## ✨ At a glance
+
+| | Capability | What it provides |
+|---|---|---|
+| 🖥️ | Terminal UI | Guided URL entry, scan summary, live progress, redirect prompts, and scrollable evidence |
+| 🔐 | Safety gates | Authorization confirmation, public-address validation, redirect revalidation, and bounded requests |
+| 🔎 | Technology detection | Headers, cookies, HTML, asset paths, TLS metadata, and optional same-origin asset inspection |
+| 🧭 | Intelligence | NVD and OSV candidate lookups with source links and uncertainty labels |
+| 💾 | Local history | SQLite preservation of completed scan observations |
 
 Evidence Auditor is a conservative, terminal-first website reconnaissance tool
 for targets you own or are explicitly authorized to assess. It collects public
@@ -6,7 +32,7 @@ HTTP/DNS/TLS observations, identifies technologies when evidence supports the
 claim, and labels public vulnerability results as candidates rather than proof
 of exploitability.
 
-## Safety model
+## 🛡️ Safety model
 
 - Requires an explicit authorization confirmation before scanning.
 - Supports HTTP and HTTPS only; rejects credentials, query targets, unusual
@@ -21,7 +47,7 @@ Browser-compatible request headers are used for normal compatibility. They are
 not a stealth guarantee: TLS characteristics, timing, request patterns, and
 the absence of browser execution may still identify automation.
 
-## Quick start
+## 🚀 Quick start
 
 ```bash
 python -m venv .venv
@@ -40,7 +66,7 @@ Run tests with:
 ./.venv/bin/python -m pytest -q
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 Copy `.env.example` to `.env` and adjust only within a controlled environment:
 
@@ -58,7 +84,7 @@ Completed scans are stored locally in SQLite. The database, logs, environment
 file, and `PROGRESS.md` are ignored by Git. `PROGRESS.md` is a local working
 log and is not part of the published project history.
 
-## Detection and intelligence
+## 🔬 Detection and intelligence
 
 Detection uses response headers, cookie names, HTML/meta markers, public asset
 paths, TLS metadata, and bounded same-origin asset content. Exact versions are
@@ -71,7 +97,7 @@ research references. NVD keyword results and OSV package results are clearly
 marked as candidates and require version, configuration, patch, and prerequisite
 verification.
 
-## Technology certainty
+## 📊 Technology certainty
 
 The TUI displays detected technologies in a checkbox-style table. `[x]` means
 that at least one public signal matched a rule; it does **not** mean the
@@ -96,20 +122,20 @@ Example:
     http.header.server: nginx/1.24.0
 ```
 
-## Project status
+## 🧪 Project status
 
 The local validation suite currently passes 32 tests. Larger production-grade
 items remain, including DNS-to-connection pinning, vendor advisory correlation,
 vulnerability caching, independently versioned fingerprint rules, and broader
 precision testing.
 
-## Audit authorship
+## 📝 Audit authorship
 
 The current implementation audit was authored by **Aegis**, the OpenCode coding
 agent. See [`AUDIT.md`](AUDIT.md) for scope, validation, conclusions, and open
 risks.
 
-## License
+## 📄 License
 
 No license has been selected yet. Treat this repository as all-rights-reserved
 until a project license is added.
